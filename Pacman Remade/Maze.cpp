@@ -22,6 +22,9 @@ bool Maze::loadFromTextFile(const std::string& filePath) {
             case 'x': // Wall
                 row.push_back(1);
                 break;
+            case '-': // Ghost entry
+                row.push_back(4);
+                break;
             case '.': // Pellet
             case 'o': // Big pellet
                 row.push_back(0);
@@ -84,7 +87,7 @@ int Maze::getTileAt(int x, int y) const
 
 void Maze::render_maze(SDL_Renderer* renderer)
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 30, 144, 255);
 
     int offsetX = 90;
     int offsetY = 120;
@@ -93,6 +96,15 @@ void Maze::render_maze(SDL_Renderer* renderer)
         for (int x = 0; x < m_width; ++x) {
             // Only draw lines if the current tile is a wall
             if (m_grid[y][x] == 1) {
+                SDL_SetRenderDrawColor(renderer, 0, 50, 144, 255);
+                SDL_Rect wallRect = {
+                    offsetX + x * m_tileSize,
+                    offsetY + y * m_tileSize,
+                    m_tileSize,
+                    m_tileSize
+                };
+                SDL_RenderFillRect(renderer, &wallRect);
+                SDL_SetRenderDrawColor(renderer, 0, 30, 144, 255);
                 // Top line
                 if (y == 0 || m_grid[y - 1][x] != 1) {
                     SDL_RenderDrawLine(renderer,
@@ -132,6 +144,18 @@ void Maze::render_maze(SDL_Renderer* renderer)
                         offsetY + (y + 1) * m_tileSize
                     );
                 }
+            }
+            else if (m_grid[y][x] == 4) {
+                SDL_SetRenderDrawColor(renderer, 160, 160, 160, 255);
+
+                SDL_RenderDrawLine(renderer,
+                    offsetX + x * m_tileSize,
+                    offsetY + y * m_tileSize + (m_tileSize / 2),
+                    offsetX + (x + 1) * m_tileSize,
+                    offsetY + y * m_tileSize + (m_tileSize / 2)
+                );
+
+                SDL_SetRenderDrawColor(renderer, 0, 30, 144, 255);
             }
         }
     }
