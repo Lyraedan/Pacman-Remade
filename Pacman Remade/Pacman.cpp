@@ -10,7 +10,7 @@ Pacman::Pacman(int x, int y, int size, SDL_Texture* pacmanTexture, Maze* maze)
     initializeAnimations();
 
     if (m_spriteSheet) {
-        m_spriteSheet->playAnimation("idle");
+        m_spriteSheet->playAnimation("active");
     }
 }
 
@@ -26,7 +26,7 @@ void Pacman::initializeAnimations()
 {
     m_spriteSheet->addAnimation("idle", {
         {0, 0, 32, 32}
-        }, 1.0);
+    }, 1.0);
 
     int frameWidth = 32;
     int frameHeight = 32;
@@ -43,7 +43,7 @@ void Pacman::initializeAnimations()
     int deathFramesCount = 12;
 
     for (int i = 0; i < deathFramesCount; ++i) {
-        deathFrames.push_back({ i * frameWidth, 96, frameWidth, frameHeight });
+        deathFrames.push_back({ i * frameWidth, 32, frameWidth, frameHeight });
     }
 
     m_spriteSheet->addAnimation("death", deathFrames, 10.0);
