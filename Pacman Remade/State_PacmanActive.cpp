@@ -3,7 +3,12 @@
 #include <SDL.h>
 
 void State_PacmanActive::enter(Entity* entity) {
+    Pacman* pacman = static_cast<Pacman*>(entity);
     std::cout << "Pacman entered ActiveState" << std::endl;
+
+    if (pacman->getSpriteSheet()) {
+        pacman->getSpriteSheet()->playAnimation("active");
+    }
 }
 
 void State_PacmanActive::exit(Entity* entity) {

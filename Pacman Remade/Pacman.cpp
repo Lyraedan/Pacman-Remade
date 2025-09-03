@@ -38,7 +38,6 @@ void Pacman::initializeAnimations()
     }
     m_spriteSheet->addAnimation("active", activeFrames, 10.0);
 
-    // Death animation loop
     std::vector<SDL_Rect> deathFrames;
     int deathFramesCount = 12;
 

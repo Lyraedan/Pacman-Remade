@@ -79,7 +79,7 @@ bool Game::initialize(const char* title, int width, int height) {
     }
 
     // Set Pac-Man to his initial state
-    m_pacman->changeState(std::make_unique<State_PacmanActive>());
+    m_pacman->changeState(std::make_unique<State_PacmanReady>());
 
     m_isRunning = true;
     return true;

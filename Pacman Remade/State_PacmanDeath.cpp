@@ -7,7 +7,7 @@ void State_PacmanDeath::enter(Entity* entity) {
     std::cout << "Pacman entered DeathState" << std::endl;
 
     if (pacman->getSpriteSheet()) {
-        pacman->getSpriteSheet()->playAnimation("dying");
+        pacman->getSpriteSheet()->playAnimation("death");
     }
 }
 

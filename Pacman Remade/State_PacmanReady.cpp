@@ -6,8 +6,12 @@ void State_PacmanReady::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
     std::cout << "Pacman entered ReadyState" << std::endl;
     
+    if (pacman->getSpriteSheet()) {
+        pacman->getSpriteSheet()->playAnimation("idle");
+    }
+
     pacman->setX(400);
-    pacman->setY(300);
+    pacman->setY(320);
 }
 
 void State_PacmanReady::exit(Entity* entity) {
