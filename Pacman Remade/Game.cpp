@@ -7,6 +7,7 @@
 #include <memory>
 #include <SDL.h>
 #include <SDL_image.h>
+#include "AudioManager.h"
 
 Game::Game() : m_isRunning(false), m_mazeTexture(nullptr) {
     // Constructor initializes members
@@ -35,6 +36,16 @@ bool Game::initialize(const char* title, int width, int height) {
 
     if (!loadTextures()) {
         std::cerr << "Failed to load game textures. Exiting." << std::endl;
+        return false;
+    }
+
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << std::endl;
+        return false;
+    }
+
+    if (!loadAudio()) {
+        std::cerr << "Failed to load game audio. Exiting." << std::endl;
         return false;
     }
 
@@ -155,5 +166,37 @@ bool Game::loadTextures() {
         return false;
     }
 
+    std::cerr << "Successfully loaded textures!" << std::endl;
+    return true;
+}
+
+bool Game::loadAudio()
+{
+    if (!AudioManager::getInstance().loadSound("res/audio/intro.wav", "intro")) {
+        std::cerr << "Failed to load intro sound!" << std::endl;
+        return false;
+    }
+
+    if (!AudioManager::getInstance().loadSound("res/audio/fruit.wav", "fruit_collected")) {
+        std::cerr << "Failed to load fruit collected sound!" << std::endl;
+        return false;
+    }
+
+    if (!AudioManager::getInstance().loadSound("res/audio/ghosts_scared.wav", "ghosts_scared")) {
+        std::cerr << "Failed to load ghosts scared sound!" << std::endl;
+        return false;
+    }
+
+    if (!AudioManager::getInstance().loadSound("res/audio/pacman_death.wav", "pacman_death")) {
+        std::cerr << "Failed to load pacman death sound!" << std::endl;
+        return false;
+    }
+
+    if (!AudioManager::getInstance().loadSound("res/audio/waka.wav", "pacman_waka")) {
+        std::cerr << "Failed to load pacman waka sound!" << std::endl;
+        return false;
+    }
+
+    std::cerr << "Successfully loaded audio!" << std::endl;
     return true;
 }

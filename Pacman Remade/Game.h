@@ -29,4 +29,5 @@ private:
     SDL_Texture* m_mazeTexture;
 
     bool loadTextures();
+    bool loadAudio();
 };
