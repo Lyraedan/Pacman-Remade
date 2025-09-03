@@ -10,6 +10,7 @@
 
 class Game {
 public:
+    static Game& getInstance();
     Game();
     ~Game();
 
@@ -20,6 +21,10 @@ public:
     void cleanup();
     bool isRunning() const;
 
+    void resetMaze();
+    void collectPelletAt(int x, int y);
+
+
 private:
     bool m_isRunning;
     std::unique_ptr<Window> m_window;
@@ -27,6 +32,7 @@ private:
     std::unique_ptr<Maze> m_maze;
     std::vector<std::unique_ptr<Pellet>> m_pellets;
     SDL_Texture* m_mazeTexture;
+
 
     bool loadTextures();
     bool loadAudio();

@@ -9,12 +9,15 @@
 #include <SDL_image.h>
 #include "AudioManager.h"
 
+Game& Game::getInstance() {
+    static Game instance;
+    return instance;
+}
+
 Game::Game() : m_isRunning(false), m_mazeTexture(nullptr) {
-    // Constructor initializes members
 }
 
 Game::~Game() {
-    // Destructor
 }
 
 bool Game::initialize(const char* title, int width, int height) {
@@ -61,23 +64,21 @@ bool Game::initialize(const char* title, int width, int height) {
     SDL_Texture* pelletTexture = TextureManager::getInstance().getTexture("pellet");
     int pelletSize = 32;
 
-    int offsetX = 90;
-    int offsetY = 120;
     // Iterate through the maze grid to create pellets
     for (int y = 0; y < m_maze->getHeight(); ++y) {
         for (int x = 0; x < m_maze->getWidth(); ++x) {
             if (m_maze->getGrid()[y][x] == 0) {
                 // Calculate the position for the pellet
-                int pelletX = offsetX + (x * tileSize) - (pelletSize / 8);
-                int pelletY = offsetY + (y * tileSize) - (pelletSize / 8);
+                int pelletX = m_maze->getMazeOffsetX() + (x * tileSize) - (pelletSize / 8);
+                int pelletY = m_maze->getMazeOffsetY() + (y * tileSize) - (pelletSize / 8);
 
                 // Create a new pellet and add it to the vector
-                m_pellets.push_back(std::make_unique<Pellet>(pelletX, pelletY, pelletSize, pelletTexture));
+                m_pellets.push_back(std::make_unique<Pellet>(pelletX, pelletY, pelletSize, pelletTexture, x, y));
             }
             else if (m_maze->getGrid()[y][x] == 6) {
                 int pacmanSize = 24;
-                int spawnX = offsetX + (x * tileSize);
-                int spawnY = offsetY + (y * tileSize);
+                int spawnX = (x * tileSize);
+                int spawnY = (y * tileSize);
                 m_pacman = std::make_unique<Pacman>(
                     spawnX,
                     spawnY,
@@ -129,7 +130,7 @@ void Game::render(SDL_Renderer* renderer)
 
     if (m_mazeTexture) {
         //SDL_RenderCopy(renderer, m_mazeTexture, NULL, NULL);
-        m_maze->debug_render(renderer);
+        //m_maze->debug_render(renderer);
         m_maze->render_maze(renderer);
     }
 
@@ -150,6 +151,25 @@ void Game::cleanup() {
 
 bool Game::isRunning() const {
     return m_isRunning;
+}
+
+void Game::resetMaze()
+{
+    // Reset pellets
+    for (const auto& pellet : m_pellets) {
+        pellet->reset();
+    }
+}
+
+void Game::collectPelletAt(int x, int y)
+{
+    auto it = std::find_if(m_pellets.begin(), m_pellets.end(), [&](const std::unique_ptr<Pellet>& pellet) {
+        return !pellet->isCollected() && pellet->getTileX() == x && pellet->getTileY() == y;
+        });
+
+    if (it != m_pellets.end()) {
+        (*it)->collect();
+    }
 }
 
 bool Game::loadTextures() {

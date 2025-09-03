@@ -28,6 +28,21 @@ void Pacman::moveToSpawn()
     setY(spawn_y);
 }
 
+void Pacman::resetLives()
+{
+    lives = 3;
+}
+
+void Pacman::gainLife()
+{
+    lives += 1;
+}
+
+void Pacman::loseLife()
+{
+    lives -= 1;
+}
+
 void Pacman::initializeAnimations()
 {
     m_spriteSheet->addAnimation("idle", {

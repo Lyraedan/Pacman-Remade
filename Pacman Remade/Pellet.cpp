@@ -1,7 +1,8 @@
 #include "Pellet.h"
+#include "AudioManager.h"
 
-Pellet::Pellet(int x, int y, int size, SDL_Texture* texture)
-    : m_x(x), m_y(y), m_size(size), m_texture(texture), m_isCollected(false) {
+Pellet::Pellet(int x, int y, int size, SDL_Texture* texture, int tileX, int tileY)
+    : m_x(x), m_y(y), m_size(size), m_texture(texture), m_isCollected(false), tile_x(tileX), tile_y(tileY) {
 }
 
 Pellet::~Pellet() {
@@ -21,6 +22,7 @@ void Pellet::render(SDL_Renderer* renderer) {
 
 void Pellet::collect() {
     m_isCollected = true;
+    AudioManager::getInstance().playSound("pacman_waka");
 }
 
 bool Pellet::isCollected() const {

@@ -12,7 +12,10 @@ public:
     int getTileSize() const;
     int getWidth() const;
     int getHeight() const;
+    int getTileAt(int x, int y) const;
 
+    int getMazeOffsetX() const { return 90; }
+    int getMazeOffsetY() const { return 120; }
     void render_maze(SDL_Renderer* renderer);
     void debug_render(SDL_Renderer* renderer);
 

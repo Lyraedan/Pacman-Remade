@@ -36,7 +36,15 @@ public:
     void setDirection(Direction direction) { m_direction = direction; }
     void changeState(std::unique_ptr<State> newState);
 
+    int getRenderX() const { return m_maze->getMazeOffsetX() + getTileX() * m_maze->getTileSize(); }
+    int getRenderY() const { return m_maze->getMazeOffsetY() + getTileY() * m_maze->getTileSize(); }
+
     void moveToSpawn();
+
+    int getLives() const { return lives; }
+    void resetLives();
+    void gainLife();
+    void loseLife();
 
 private:
     double m_x, m_y;
@@ -44,6 +52,8 @@ private:
     int m_size;
     Direction m_direction;
     double m_speed;
+
+    int lives = 3;
 
     SpriteSheet* m_spriteSheet;
     Maze* m_maze;

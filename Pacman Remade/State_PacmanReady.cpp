@@ -2,6 +2,7 @@
 #include "State_PacmanActive.h" // The next state we'll transition to
 #include <iostream>
 #include "AudioManager.h"
+#include "Game.h"
 
 void State_PacmanReady::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
@@ -12,6 +13,11 @@ void State_PacmanReady::enter(Entity* entity) {
     }
 
     pacman->moveToSpawn();
+    
+    if (pacman->getLives() <= 0) {
+        Game::getInstance().resetMaze();
+        pacman->resetLives();
+    }
 
     AudioManager::getInstance().playSound("intro");
 }
@@ -39,6 +45,6 @@ void State_PacmanReady::render(Entity* entity, SDL_Renderer* renderer) {
     Pacman* pacman = static_cast<Pacman*>(entity);
 
     if (pacman->getSpriteSheet()) {
-        pacman->getSpriteSheet()->render(renderer, pacman->getX(), pacman->getY(), pacman->getSize(), pacman->getSize(), 0.0);
+        pacman->getSpriteSheet()->render(renderer, pacman->getRenderX(), pacman->getRenderY(), pacman->getSize(), pacman->getSize(), 0.0);
     }
 }

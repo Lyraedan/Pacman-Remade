@@ -32,6 +32,7 @@ void State_PacmanDeath::update(Entity* entity, double deltaTime) {
     m_timer += deltaTime;
 
     if (m_timer >= m_animationLength) {
+        pacman->loseLife();
         pacman->changeState(std::make_unique<State_PacmanReady>());
     }
 }
@@ -40,6 +41,6 @@ void State_PacmanDeath::render(Entity* entity, SDL_Renderer* renderer) {
     Pacman* pacman = static_cast<Pacman*>(entity);
 
     if (pacman->getSpriteSheet()) {
-        pacman->getSpriteSheet()->render(renderer, pacman->getX(), pacman->getY(), pacman->getSize(), pacman->getSize(), 0.0);
+        pacman->getSpriteSheet()->render(renderer, pacman->getRenderX(), pacman->getRenderY(), pacman->getSize(), pacman->getSize(), 0.0);
     }
 }

@@ -1,13 +1,11 @@
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
-    Game myGame;
-
-    if (!myGame.initialize("Pacman Remade", 800, 920)) {
+    if (!Game::getInstance().initialize("Pacman Remade", 800, 920)) {
         return 1;
     }
 
-    myGame.run();
+    Game::getInstance().run();
 
     return 0;
 }

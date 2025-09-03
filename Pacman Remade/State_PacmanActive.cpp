@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "State_PacmanDeath.h"
+#include "Game.h"
 
 void State_PacmanActive::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
@@ -56,14 +57,20 @@ void State_PacmanActive::update(Entity* entity, double deltaTime) {
         break;
     }
 
-    int tileX = static_cast<int>((nextX / maze->getTileSize()));
-    int tileY = static_cast<int>((nextY / maze->getTileSize()));
+    int tileX = static_cast<int>(nextX / maze->getTileSize());
+    int tileY = static_cast<int>(nextY / maze->getTileSize());
 
-    if (maze->getGrid()[tileY][tileX] != 1) {
+    int nextTileValue = maze->getTileAt(tileX, tileY);
+    if (nextTileValue != 1 && nextTileValue != -2) {
         pacman->setX(nextX);
         pacman->setY(nextY);
+        // Is pellet
+        if (nextTileValue == 0) {
+            Game::getInstance().collectPelletAt(tileX, tileY);
+        }
     }
-    
+
+    // Update the animation
     if (pacman->getSpriteSheet()) {
         pacman->getSpriteSheet()->update(deltaTime);
     }
@@ -87,6 +94,7 @@ void State_PacmanActive::render(Entity* entity, SDL_Renderer* renderer) {
             angle = 0.0;
             break;
         }
-        pacman->getSpriteSheet()->render(renderer, pacman->getX(), pacman->getY(), pacman->getSize(), pacman->getSize(), angle);
+
+        pacman->getSpriteSheet()->render(renderer, pacman->getRenderX(), pacman->getRenderY(), pacman->getSize(), pacman->getSize(), angle);
     }
 }

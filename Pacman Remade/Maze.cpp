@@ -74,6 +74,14 @@ int Maze::getHeight() const {
     return m_height;
 }
 
+int Maze::getTileAt(int x, int y) const
+{
+    if (x >= 0 && x < m_width && y >= 0 && y < m_height) {
+        return m_grid[y][x];
+    }
+    return -2;
+}
+
 void Maze::render_maze(SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
