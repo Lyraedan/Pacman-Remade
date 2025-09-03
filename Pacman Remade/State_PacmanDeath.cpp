@@ -7,6 +7,7 @@ void State_PacmanDeath::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
     std::cout << "Pacman entered DeathState" << std::endl;
 
+    m_animationLength = 1.25;
     if (pacman->getSpriteSheet()) {
         pacman->getSpriteSheet()->playAnimation("death");
     }

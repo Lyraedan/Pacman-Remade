@@ -58,14 +58,20 @@ void State_PacmanActive::update(Entity* entity, double deltaTime) {
     }
 
     // Check if the next tile is a wall
-    int tileX = static_cast<int>((nextX + pacman->getSize() / 2) / maze->getTileSize());
-    int tileY = static_cast<int>((nextY + pacman->getSize() / 2) / maze->getTileSize());
+    int tileX = static_cast<int>((nextX / maze->getTileSize()));
+    int tileY = static_cast<int>((nextY / maze->getTileSize()));
 
+    std::cout << "Pacman pos: " << pacman->getTileX() << ", " << pacman->getTileY() << " | next tile: " << tileX << ", " << tileY << " - " << maze->getGrid()[tileY][tileX] << std::endl;
+
+    /*
     if (maze->getGrid()[tileY][tileX] != 1) {
-        // Update Pac-Man's position
         pacman->setX(static_cast<int>(nextX));
         pacman->setY(static_cast<int>(nextY));
     }
+    */
+
+    pacman->setX(static_cast<int>(nextX));
+    pacman->setY(static_cast<int>(nextY));
 
     // Update the animation
     if (pacman->getSpriteSheet()) {

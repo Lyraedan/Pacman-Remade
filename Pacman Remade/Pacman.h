@@ -28,6 +28,8 @@ public:
     Direction getDirection() const { return m_direction; }
     SpriteSheet* getSpriteSheet() const { return m_spriteSheet; }
     Maze* getMaze() const { return m_maze; }
+    int getTileX() const { return m_x / m_maze->getTileSize(); }
+    int getTileY() const { return m_y / m_maze->getTileSize(); }
 
     void setX(int x) { m_x = x; }
     void setY(int y) { m_y = y; }

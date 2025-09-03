@@ -26,8 +26,8 @@ void State_PacmanReady::update(Entity* entity, double deltaTime) {
     Pacman* pacman = static_cast<Pacman*>(entity);
     m_timer += deltaTime;
 
-    // After 3 seconds, transition to the Active state
-    if (m_timer >= 3.0) {
+    // After 4 seconds, transition to the Active state
+    if (m_timer >= 4.0) {
         pacman->changeState(std::make_unique<State_PacmanActive>());
     }
 
