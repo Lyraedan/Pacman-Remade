@@ -36,8 +36,12 @@ public:
     void setDirection(Direction direction) { m_direction = direction; }
     void changeState(std::unique_ptr<State> newState);
 
+    // Snapped to grid
     int getRenderX() const { return m_maze->getMazeOffsetX() + getTileX() * m_maze->getTileSize(); }
     int getRenderY() const { return m_maze->getMazeOffsetY() + getTileY() * m_maze->getTileSize(); }
+    // Slightly misaligned but smooth
+    //int getRenderX() const { return m_maze->getMazeOffsetX() + getX(); }
+    //int getRenderY() const { return m_maze->getMazeOffsetY() + getY(); }
 
     void moveToSpawn();
 
