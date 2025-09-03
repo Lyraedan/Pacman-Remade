@@ -1,6 +1,7 @@
 #include "State_PacmanDeath.h"
 #include "State_PacmanReady.h" // Transition back to the Ready state
 #include <iostream>
+#include "AudioManager.h"
 
 void State_PacmanDeath::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
@@ -9,6 +10,8 @@ void State_PacmanDeath::enter(Entity* entity) {
     if (pacman->getSpriteSheet()) {
         pacman->getSpriteSheet()->playAnimation("death");
     }
+
+    AudioManager::getInstance().playSound("pacman_death");
 }
 
 void State_PacmanDeath::exit(Entity* entity) {

@@ -1,6 +1,7 @@
 #include "State_PacmanReady.h"
 #include "State_PacmanActive.h" // The next state we'll transition to
 #include <iostream>
+#include "AudioManager.h"
 
 void State_PacmanReady::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
@@ -12,6 +13,8 @@ void State_PacmanReady::enter(Entity* entity) {
 
     pacman->setX(400);
     pacman->setY(320);
+
+    AudioManager::getInstance().playSound("intro");
 }
 
 void State_PacmanReady::exit(Entity* entity) {

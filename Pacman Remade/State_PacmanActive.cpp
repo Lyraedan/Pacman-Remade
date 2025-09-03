@@ -1,6 +1,7 @@
 #include "State_PacmanActive.h"
 #include <iostream>
 #include <SDL.h>
+#include "State_PacmanDeath.h"
 
 void State_PacmanActive::enter(Entity* entity) {
     Pacman* pacman = static_cast<Pacman*>(entity);
@@ -31,6 +32,9 @@ void State_PacmanActive::update(Entity* entity, double deltaTime) {
     }
     else if (state[SDL_SCANCODE_RIGHT] || state[SDL_SCANCODE_D]) {
         pacman->setDirection(RIGHT);
+    }
+    else if (state[SDL_SCANCODE_SPACE]) {
+        pacman->changeState(std::make_unique<State_PacmanDeath>());
     }
 
     // Use double for accurate position calculations
