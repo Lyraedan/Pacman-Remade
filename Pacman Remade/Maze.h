@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <SDL.h>
 
 class Maze {
 public:
@@ -11,6 +12,9 @@ public:
     int getTileSize() const;
     int getWidth() const;
     int getHeight() const;
+
+    void render_maze(SDL_Renderer* renderer);
+    void debug_render(SDL_Renderer* renderer);
 
 private:
     std::vector<std::vector<int>> m_grid;

@@ -15,7 +15,7 @@ public:
 
     bool initialize(const char* title, int width, int height);
     void run();
-    void update(float deltaTime);
+    void update(double deltaTime);
     void render(SDL_Renderer* renderer);
     void cleanup();
     bool isRunning() const;

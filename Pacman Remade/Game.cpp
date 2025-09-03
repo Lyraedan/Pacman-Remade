@@ -51,7 +51,7 @@ bool Game::initialize(const char* title, int width, int height) {
 
     m_mazeTexture = TextureManager::getInstance().getTexture("playfield");
 
-    int tileSize = 32;
+    int tileSize = 24;
     m_maze = std::make_unique<Maze>(tileSize);
     if (!m_maze->loadFromTextFile("res/map.txt")) {
         std::cerr << "Failed to load maze from file!" << std::endl;
@@ -61,21 +61,21 @@ bool Game::initialize(const char* title, int width, int height) {
     SDL_Texture* pelletTexture = TextureManager::getInstance().getTexture("pellet");
     int pelletSize = 32;
 
-    int offsetX = 180;
-    int offsetY = 68;
+    int offsetX = 90;
+    int offsetY = 40;
     // Iterate through the maze grid to create pellets
     for (int y = 0; y < m_maze->getHeight(); ++y) {
         for (int x = 0; x < m_maze->getWidth(); ++x) {
             if (m_maze->getGrid()[y][x] == 0) {
                 // Calculate the position for the pellet
-                int pelletX = offsetX + (x * tileSize) / 2;
-                int pelletY = offsetY + (y * tileSize) / 2;
+                int pelletX = offsetX + (x * tileSize) - (pelletSize / 8);
+                int pelletY = offsetY + (y * tileSize) - (pelletSize / 8);
 
                 // Create a new pellet and add it to the vector
                 m_pellets.push_back(std::make_unique<Pellet>(pelletX, pelletY, pelletSize, pelletTexture));
             }
             else if (m_maze->getGrid()[y][x] == 6) {
-                int pacmanSize = 32;
+                int pacmanSize = 24;
                 int spawnX = offsetX + (x * tileSize) / 2;
                 int spawnY = offsetY + (y * tileSize) / 2;
                 m_pacman = std::make_unique<Pacman>(
@@ -117,7 +117,7 @@ void Game::run() {
     }
 }
 
-void Game::update(float deltaTime)
+void Game::update(double deltaTime)
 {
     m_pacman->update(deltaTime);
 }
@@ -128,7 +128,9 @@ void Game::render(SDL_Renderer* renderer)
     SDL_RenderClear(renderer);
 
     if (m_mazeTexture) {
-        SDL_RenderCopy(renderer, m_mazeTexture, NULL, NULL);
+        //SDL_RenderCopy(renderer, m_mazeTexture, NULL, NULL);
+        m_maze->debug_render(renderer);
+        m_maze->render_maze(renderer);
     }
 
     for (const auto& pellet : m_pellets) {
@@ -162,6 +164,12 @@ bool Game::loadTextures() {
     }
 
     if (!TextureManager::getInstance().loadTexture("res/gfx/pellet.png", "pellet", m_window->getSDLRenderer())) {
+        std::cerr << "Failed to load Pallet texture!" << std::endl;
+        return false;
+    }
+
+    // Debug textures
+    if (!TextureManager::getInstance().loadTexture("res/gfx/debug/wall.png", "debug_wall", m_window->getSDLRenderer())) {
         std::cerr << "Failed to load Pallet texture!" << std::endl;
         return false;
     }

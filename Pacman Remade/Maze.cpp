@@ -1,6 +1,7 @@
 #include "Maze.h"
 #include <fstream>
 #include <iostream>
+#include "TextureManager.h"
 
 Maze::Maze(int tileSize) : m_tileSize(tileSize), m_width(0), m_height(0) {}
 
@@ -71,4 +72,113 @@ int Maze::getWidth() const {
 
 int Maze::getHeight() const {
     return m_height;
+}
+
+void Maze::render_maze(SDL_Renderer* renderer)
+{
+    // Set the drawing color to blue
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+    int offsetX = 90;
+    int offsetY = 40;
+
+    // Loop through the maze grid and render the walls
+    for (int y = 0; y < m_height; ++y) {
+        for (int x = 0; x < m_width; ++x) {
+            // Only draw lines if the current tile is a wall
+            if (m_grid[y][x] == 1) {
+                // Top line
+                if (y == 0 || m_grid[y - 1][x] != 1) {
+                    SDL_RenderDrawLine(renderer,
+                        offsetX + x * m_tileSize,
+                        offsetY + y * m_tileSize,
+                        offsetX + (x + 1) * m_tileSize,
+                        offsetY + y * m_tileSize
+                    );
+                }
+
+                // Bottom line
+                if (y == m_height - 1 || m_grid[y + 1][x] != 1) {
+                    SDL_RenderDrawLine(renderer,
+                        offsetX + x * m_tileSize,
+                        offsetY + (y + 1) * m_tileSize,
+                        offsetX + (x + 1) * m_tileSize,
+                        offsetY + (y + 1) * m_tileSize
+                    );
+                }
+
+                // Left line
+                if (x == 0 || m_grid[y][x - 1] != 1) {
+                    SDL_RenderDrawLine(renderer,
+                        offsetX + x * m_tileSize,
+                        offsetY + y * m_tileSize,
+                        offsetX + x * m_tileSize,
+                        offsetY + (y + 1) * m_tileSize
+                    );
+                }
+
+                // Right line
+                if (x == m_width - 1 || m_grid[y][x + 1] != 1) {
+                    SDL_RenderDrawLine(renderer,
+                        offsetX + (x + 1) * m_tileSize,
+                        offsetY + y * m_tileSize,
+                        offsetX + (x + 1) * m_tileSize,
+                        offsetY + (y + 1) * m_tileSize
+                    );
+                }
+            }
+        }
+    }
+
+    // Now, draw the outer perimeter of the maze
+    // Top border
+    SDL_RenderDrawLine(renderer,
+        offsetX,
+        offsetY,
+        offsetX + m_width * m_tileSize,
+        offsetY
+    );
+
+    // Bottom border
+    SDL_RenderDrawLine(renderer,
+        offsetX,
+        offsetY + m_height * m_tileSize,
+        offsetX + m_width * m_tileSize,
+        offsetY + m_height * m_tileSize
+    );
+
+    // Left border
+    SDL_RenderDrawLine(renderer,
+        offsetX,
+        offsetY,
+        offsetX,
+        offsetY + m_height * m_tileSize
+    );
+
+    // Right border
+    SDL_RenderDrawLine(renderer,
+        offsetX + m_width * m_tileSize,
+        offsetY,
+        offsetX + m_width * m_tileSize,
+        offsetY + m_height * m_tileSize
+    );
+}
+void Maze::debug_render(SDL_Renderer* renderer)
+{
+    // Get the wall texture from the TextureManager
+    SDL_Texture* wallTexture = TextureManager::getInstance().getTexture("debug_wall");
+
+    int offsetX = 90;
+    int offsetY = 40;
+
+    // Loop through the maze grid and render the walls
+    for (int y = 0; y < m_height; ++y) {
+        for (int x = 0; x < m_width; ++x) {
+            // If the tile is a wall (value 1)
+            if (m_grid[y][x] == 1) {
+                SDL_Rect destRect = { offsetX + (x * m_tileSize), offsetY + (y * m_tileSize), m_tileSize, m_tileSize };
+                SDL_RenderCopy(renderer, wallTexture, NULL, &destRect);
+            }
+        }
+    }
 }

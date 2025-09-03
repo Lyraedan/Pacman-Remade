@@ -3,7 +3,7 @@
 int main(int argc, char* argv[]) {
     Game myGame;
 
-    if (!myGame.initialize("Pacman Remade", 800, 600)) {
+    if (!myGame.initialize("Pacman Remade", 800, 920)) {
         return 1;
     }
 

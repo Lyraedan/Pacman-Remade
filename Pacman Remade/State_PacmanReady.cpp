@@ -28,7 +28,7 @@ void State_PacmanReady::update(Entity* entity, double deltaTime) {
 
     // After 4 seconds, transition to the Active state
     if (m_timer >= 4.0) {
-        pacman->changeState(std::make_unique<State_PacmanActive>());
+        //pacman->changeState(std::make_unique<State_PacmanActive>());
     }
 
     if (pacman->getSpriteSheet()) {
