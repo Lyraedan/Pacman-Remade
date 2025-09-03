@@ -37,7 +37,6 @@ void State_PacmanActive::update(Entity* entity, double deltaTime) {
         pacman->changeState(std::make_unique<State_PacmanDeath>());
     }
 
-    // Use double for accurate position calculations
     double nextX = static_cast<double>(pacman->getX());
     double nextY = static_cast<double>(pacman->getY());
     double speed = pacman->getSpeed() * deltaTime;
@@ -65,8 +64,6 @@ void State_PacmanActive::update(Entity* entity, double deltaTime) {
         pacman->setY(nextY);
     }
     
-
-    // Update the animation
     if (pacman->getSpriteSheet()) {
         pacman->getSpriteSheet()->update(deltaTime);
     }

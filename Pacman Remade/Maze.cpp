@@ -76,13 +76,11 @@ int Maze::getHeight() const {
 
 void Maze::render_maze(SDL_Renderer* renderer)
 {
-    // Set the drawing color to blue
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 
     int offsetX = 90;
     int offsetY = 120;
 
-    // Loop through the maze grid and render the walls
     for (int y = 0; y < m_height; ++y) {
         for (int x = 0; x < m_width; ++x) {
             // Only draw lines if the current tile is a wall
@@ -130,7 +128,6 @@ void Maze::render_maze(SDL_Renderer* renderer)
         }
     }
 
-    // Now, draw the outer perimeter of the maze
     // Top border
     SDL_RenderDrawLine(renderer,
         offsetX,
@@ -165,13 +162,11 @@ void Maze::render_maze(SDL_Renderer* renderer)
 }
 void Maze::debug_render(SDL_Renderer* renderer)
 {
-    // Get the wall texture from the TextureManager
     SDL_Texture* wallTexture = TextureManager::getInstance().getTexture("debug_wall");
 
     int offsetX = 90;
     int offsetY = 120;
 
-    // Loop through the maze grid and render the walls
     for (int y = 0; y < m_height; ++y) {
         for (int x = 0; x < m_width; ++x) {
             // If the tile is a wall (value 1)
