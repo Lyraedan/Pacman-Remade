@@ -4,7 +4,7 @@
 
 // Pacman now takes a Maze pointer in its constructor
 Pacman::Pacman(int x, int y, int size, SDL_Texture* pacmanTexture, Maze* maze)
-    : m_x(x), m_y(y), m_size(size), m_maze(maze), m_direction(RIGHT), m_speed(150.0) {
+    : m_x(x), m_y(y), m_size(size), m_maze(maze), m_direction(RIGHT), m_speed(150.0), spawn_x(x), spawn_y(y) {
 
     m_spriteSheet = new SpriteSheet(pacmanTexture);
     initializeAnimations();
@@ -20,6 +20,12 @@ Pacman::~Pacman() {
 
 void Pacman::changeState(std::unique_ptr<State> newState) {
     m_stateMachine.changeState(std::move(newState), this);
+}
+
+void Pacman::moveToSpawn()
+{
+    setX(spawn_x);
+    setY(spawn_y);
 }
 
 void Pacman::initializeAnimations()

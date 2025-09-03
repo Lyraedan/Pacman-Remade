@@ -11,8 +11,7 @@ void State_PacmanReady::enter(Entity* entity) {
         pacman->getSpriteSheet()->playAnimation("idle");
     }
 
-    pacman->setX(400);
-    pacman->setY(320);
+    pacman->moveToSpawn();
 
     AudioManager::getInstance().playSound("intro");
 }
@@ -28,7 +27,7 @@ void State_PacmanReady::update(Entity* entity, double deltaTime) {
 
     // After 4 seconds, transition to the Active state
     if (m_timer >= 4.0) {
-        //pacman->changeState(std::make_unique<State_PacmanActive>());
+        pacman->changeState(std::make_unique<State_PacmanActive>());
     }
 
     if (pacman->getSpriteSheet()) {

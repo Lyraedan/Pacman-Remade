@@ -36,8 +36,11 @@ public:
     void setDirection(Direction direction) { m_direction = direction; }
     void changeState(std::unique_ptr<State> newState);
 
+    void moveToSpawn();
+
 private:
     double m_x, m_y;
+    double spawn_x, spawn_y;
     int m_size;
     Direction m_direction;
     double m_speed;

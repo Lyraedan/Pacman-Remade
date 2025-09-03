@@ -80,7 +80,7 @@ void Maze::render_maze(SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 
     int offsetX = 90;
-    int offsetY = 40;
+    int offsetY = 120;
 
     // Loop through the maze grid and render the walls
     for (int y = 0; y < m_height; ++y) {
@@ -169,7 +169,7 @@ void Maze::debug_render(SDL_Renderer* renderer)
     SDL_Texture* wallTexture = TextureManager::getInstance().getTexture("debug_wall");
 
     int offsetX = 90;
-    int offsetY = 40;
+    int offsetY = 120;
 
     // Loop through the maze grid and render the walls
     for (int y = 0; y < m_height; ++y) {

@@ -62,7 +62,7 @@ bool Game::initialize(const char* title, int width, int height) {
     int pelletSize = 32;
 
     int offsetX = 90;
-    int offsetY = 40;
+    int offsetY = 120;
     // Iterate through the maze grid to create pellets
     for (int y = 0; y < m_maze->getHeight(); ++y) {
         for (int x = 0; x < m_maze->getWidth(); ++x) {
@@ -76,8 +76,8 @@ bool Game::initialize(const char* title, int width, int height) {
             }
             else if (m_maze->getGrid()[y][x] == 6) {
                 int pacmanSize = 24;
-                int spawnX = offsetX + (x * tileSize) / 2;
-                int spawnY = offsetY + (y * tileSize) / 2;
+                int spawnX = offsetX + (x * tileSize);
+                int spawnY = offsetY + (y * tileSize);
                 m_pacman = std::make_unique<Pacman>(
                     spawnX,
                     spawnY,
