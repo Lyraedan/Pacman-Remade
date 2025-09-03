@@ -101,23 +101,32 @@ void Game::run() {
             }
         }
 
-        m_pacman->update(deltaTime);
-
-        SDL_SetRenderDrawColor(m_window->getSDLRenderer(), 0, 0, 0, 255);
-        SDL_RenderClear(m_window->getSDLRenderer());
-
-        if (m_mazeTexture) {
-            SDL_RenderCopy(m_window->getSDLRenderer(), m_mazeTexture, NULL, NULL);
-        }
-
-        for (const auto& pellet : m_pellets) {
-            pellet->render(m_window->getSDLRenderer());
-        }
-
-        m_pacman->render(m_window->getSDLRenderer());
-
-        SDL_RenderPresent(m_window->getSDLRenderer());
+        update(deltaTime);
+        render(m_window->getSDLRenderer());
     }
+}
+
+void Game::update(float deltaTime)
+{
+    m_pacman->update(deltaTime);
+}
+
+void Game::render(SDL_Renderer* renderer)
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    if (m_mazeTexture) {
+        SDL_RenderCopy(renderer, m_mazeTexture, NULL, NULL);
+    }
+
+    for (const auto& pellet : m_pellets) {
+        pellet->render(renderer);
+    }
+
+    m_pacman->render(renderer);
+
+    SDL_RenderPresent(renderer);
 }
 
 void Game::cleanup() {
