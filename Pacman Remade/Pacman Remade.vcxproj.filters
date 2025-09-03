@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{bba41a14-0183-45cb-8927-9e6a3bcb416e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{0755b1f7-2a5c-473a-9303-6dac6b067681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{9370aed8-20cc-42be-bc57-36ce45d8352d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities">
+      <UniqueIdentifier>{79155d4c-cdd6-420f-92d0-0bd875fe4f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities\Pacman">
+      <UniqueIdentifier>{12717c44-4c92-4e54-b387-8b267afdaa2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities\Pacman\States">
+      <UniqueIdentifier>{b55756dd-e013-47c8-aa44-fe6e34320eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{0a8611da-8e69-483d-b561-6a9c22dde03a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Entities">
+      <UniqueIdentifier>{349fe2ce-8f7a-49a8-87d4-6d82912313dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Entities\Pacman">
+      <UniqueIdentifier>{94781b35-1044-40cf-a1d1-0b77308356e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Entities\Pacman\States">
+      <UniqueIdentifier>{27dee609-4629-4b42-a168-429356d1046f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Entities\Pellet">
+      <UniqueIdentifier>{8d1ee98e-6c20-4687-9ab4-cabc7de64345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities\Pellet">
+      <UniqueIdentifier>{30fd2c63-d52f-4267-807c-61b39c9b5b97}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Pacman.h">
+      <Filter>Header Files\Game\Entities\Pacman</Filter>
+    </ClInclude>
+    <ClInclude Include="State_PacmanReady.h">
+      <Filter>Header Files\Game\Entities\Pacman\States</Filter>
+    </ClInclude>
+    <ClInclude Include="State_PacmanActive.h">
+      <Filter>Header Files\Game\Entities\Pacman\States</Filter>
+    </ClInclude>
+    <ClInclude Include="State_PacmanDeath.h">
+      <Filter>Header Files\Game\Entities\Pacman\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Maze.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Pellet.h">
+      <Filter>Header Files\Game\Entities\Pellet</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Pacman.cpp">
+      <Filter>Source Files\Game\Entities\Pacman</Filter>
+    </ClCompile>
+    <ClCompile Include="State_PacmanReady.cpp">
+      <Filter>Source Files\Game\Entities\Pacman\States</Filter>
+    </ClCompile>
+    <ClCompile Include="State_PacmanActive.cpp">
+      <Filter>Source Files\Game\Entities\Pacman\States</Filter>
+    </ClCompile>
+    <ClCompile Include="State_PacmanDeath.cpp">
+      <Filter>Source Files\Game\Entities\Pacman\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Maze.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Pellet.cpp">
+      <Filter>Source Files\Game\Entities\Pellet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
